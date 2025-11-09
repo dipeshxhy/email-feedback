@@ -29,6 +29,9 @@ app.use(
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
+app.get('/dipesh', (req, res) => {
+  res.send('hi dipesh, how you doing ...');
+});
 
 app.use((req, res, next) => {
   next(new ApiError(404, `Cannot ${req.method} ${req.originalUrl}`));
