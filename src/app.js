@@ -1,15 +1,15 @@
 import dotenv from 'dotenv';
 
 dotenv.config({
-  path: '../.env',
+  path: './.env',
 });
 
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-// import { errHandler } from './middlewares/error.middleware.js';
-// import { ApiError } from './utils/api-error.js';
+import { errHandler } from './middlewares/errorHandler.middleware.js';
+import { ApiError } from './utils/api-error.js';
 
 const app = express();
 
@@ -30,9 +30,9 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-// app.use((req, res, next) => {
-//   next(new ApiError(404, `Cannot ${req.method} ${req.originalUrl}`));
-// });
+app.use((req, res, next) => {
+  next(new ApiError(404, `Cannot ${req.method} ${req.originalUrl}`));
+});
 
-// app.use(errHandler);
+app.use(errHandler);
 export default app;
